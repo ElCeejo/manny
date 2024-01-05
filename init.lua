@@ -62,6 +62,8 @@ creatura.register_mob("manny:manny", {
 		self.fed_vinegar = self:recall("fed_vinegar") or 0
 		self.fed_baking_soda = self:recall("fed_baking_soda") or 0
 		self.hammy_countdown = self:recall("hammy_countdown") or 5
+
+		self.manny_scale = 1
 	end,
 
 	step_func = function(self)
@@ -73,6 +75,9 @@ creatura.register_mob("manny:manny", {
 				self:play_sound("lit")
 			end
 			hammy_countdown = hammy_countdown - self.dtime
+			self.manny_scale = self.manny_scale + (self.dtime / 5)
+
+			self:set_scale(self.manny_scale)
 		end
 
 		if hammy_countdown <= 0 then
